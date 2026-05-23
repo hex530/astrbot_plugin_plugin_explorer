@@ -1,0 +1,8 @@
+{
+  "admin_qq": {
+    "description": "管理员 QQ",
+    "type": "string",
+    "default": "1591793025",
+    "hint": "只有该用户才能命令机器人搜索、安装新插件。"
+  }
+}
