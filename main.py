@@ -1,5 +1,6 @@
+from astrbot.api.event import AstrMessageEvent
+from astrbot.api.event.filter import llm_tool
 from astrbot.api.star import Context, Star, register
-from astrbot.api.all import *
 import aiohttp
 import logging
 import os
@@ -7,7 +8,7 @@ import subprocess
 
 logger = logging.getLogger("astrbot")
 
-@register("plugin_explorer", "夕小柠 & 陆渊", "智能插件管家：支持 Token 加速搜索与一键安装。", "1.2.0")
+@register("plugin_explorer", "夕小柠 & 陆渊", "智能插件管家：支持 Token 加速搜索与一键安装。", "1.2.1")
 class PluginExplorer(Star):
     def __init__(self, context: Context, config: dict):
         super().__init__(context)
@@ -28,8 +29,10 @@ class PluginExplorer(Star):
     @llm_tool(name="search_github_plugins")
     async def search_github_plugins(self, event: AstrMessageEvent, keyword: str):
         """
-        在 GitHub 上搜索 AstrBot 插件。
-        参数 keyword: 搜索关键词。
+        搜索 GitHub 上的 AstrBot 插件。
+        
+        Args:
+            keyword (string): 搜索关键词，例如 '音乐' 或 '游戏'。
         """
         if not self._is_admin(event):
             return "权限不足。只有管理员可以搜索并安装插件。"
@@ -70,7 +73,9 @@ class PluginExplorer(Star):
     async def install_plugin_direct(self, event: AstrMessageEvent, repo_url: str):
         """
         直接安装指定的 GitHub 插件。
-        参数 repo_url: 插件的 GitHub 仓库链接。
+        
+        Args:
+            repo_url (string): 插件的 GitHub 仓库链接。
         """
         if not self._is_admin(event):
             return "权限不足。"
