@@ -4,5 +4,17 @@
     "type": "string",
     "default": "1591793025",
     "hint": "只有该用户才能命令机器人搜索、安装新插件。"
+  },
+  "github_token": {
+    "description": "GitHub 个人访问令牌 (Token)",
+    "type": "string",
+    "default": "",
+    "hint": "填入后可提升 GitHub API 搜索限额，防止频繁搜索被拦截。"
+  },
+  "readme_summary_limit": {
+    "description": "README 预览字数限制",
+    "type": "int",
+    "default": 200,
+    "hint": "在搜索结果中展示 README 摘要的最大字数。"
   }
 }
